@@ -5,15 +5,12 @@ const prodData=async ()=>{
     return res.json();
 }
 let products=[];
-// Cart array to store items
 let cart = [];
 
-// iife function 
 (async function init(){
    try{
         products=await prodData();
         console.log(products);
-        // render products 
         const list=document.getElementById("productList");
         const cards=products.map(prod=> 
             `
@@ -51,16 +48,13 @@ let cart = [];
     cartBadge.innerText=cart.length
  }
  
- // Cart Modal
  const cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
  
- // Open cart modal when clicking cart button
  document.getElementById("cartBtn").onclick = () => {
     renderCart();
     cartModal.show();
  };
  
- // Render cart items
  function renderCart() {
     const cartItemsDiv = document.getElementById("cartItems");
     const cartTotal = document.getElementById("cartTotal");
@@ -90,21 +84,18 @@ let cart = [];
     cartTotal.innerText = '$' + total.toFixed(2);
  }
  
- // Remove item from cart
  window.removeFromCart = function(index) {
     cart.splice(index, 1);
     updateCart();
     renderCart();
  };
  
- // Clear cart
  document.getElementById("clearCart").onclick = () => {
     cart = [];
     updateCart();
     renderCart();
  };
  
- // Add to cart from modal
 document.getElementById("modalAdd").onclick=()=>{
     if (currentProduct) {
         cart.push(currentProduct);
@@ -117,3 +108,4 @@ document.getElementById("modalAdd").onclick=()=>{
      console.log(err)
    }
 })();
+
